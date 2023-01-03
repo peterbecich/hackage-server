@@ -32,6 +32,10 @@
       in flake // {
         legacyPackages = pkgs;
 
+        packages = {
+          default = flake.packages."hackage-server:exe:hackage-server";
+        };
+
         devShells.default = pkgs.hixProject.shellFor {
           tools = {
             cabal = "latest";
