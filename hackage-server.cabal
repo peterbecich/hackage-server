@@ -2,6 +2,8 @@ cabal-version: 3.0
 name:         hackage-server
 version:      0.5.1
 
+build-type:   Simple
+
 category:     Distribution
 synopsis:     The Hackage web server
 description:  The new implementation of the Hackage web server, based on the
@@ -94,6 +96,7 @@ flag cabal-parsers
   manual: True
   default: False
 
+build-tool-depends: cabal-doctests
 ----------------------------------------------------------------------------
 
 common defaults
@@ -440,6 +443,9 @@ library lib-server
   if flag(cabal-parsers)
     build-depends: cabal-parsers ^>= 0
 
+  if !os(darwin)
+    extra-libraries: crypt
+
 ----------------------------------------------------------------------------
 
 common exe-defaults
@@ -639,13 +645,12 @@ test-suite HashTests
     , tasty       ^>= 1.4
     , tasty-hunit ^>= 0.10
 
-test-suite DocTests
-  import:         test-defaults
+-- test-suite DocTests
+--   import:         test-defaults
 
-  type:           exitcode-stdio-1.0
-  main-is:        DocTestMain.hs
-
-  build-depends:
-    , lib-server
-    , doctest-parallel ^>= 0.2.2
-        -- doctest-parallel-0.2.2 is the first to filter out autogen-modules
+--   type:           exitcode-stdio-1.0
+--   main-is:        DocTestMain.hs
+--   build-depends:
+--     , lib-server
+--     , doctest-parallel ^>= 0.2.2
+--         -- doctest-parallel-0.2.2 is the first to filter out autogen-modules

@@ -15,15 +15,18 @@
       flake-utils.lib.eachSystem supportedSystems (system:
       let
         overlays = [ haskellNix.overlay
-          (final: prev: {
-            hixProject =
-              final.haskell-nix.hix.project {
-                src = ./.;
-                evalSystem = "x86_64-linux";
-                projectFileName = "cabal.project";
-              };
-          })
-        ];
+                     (final: prev: {
+                       hixProject =
+                         final.haskell-nix.hix.project {
+                           src = ./.;
+                           evalSystem = "x86_64-linux";
+                           projectFileName = "cabal.project";
+                           # modules = [
+                           #   { reinstallableLibGhc = true; }
+                           # ];
+                         };
+                     })
+                   ];
         pkgs = import nixpkgs { inherit system overlays; inherit (haskellNix) config; };
         flake = pkgs.hixProject.flake {};
       in flake // {
