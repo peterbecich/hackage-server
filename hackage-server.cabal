@@ -96,7 +96,7 @@ flag cabal-parsers
   manual: True
   default: False
 
-build-tool-depends: cabal-doctests
+-- build-tool-depends: cabal-doctest
 ----------------------------------------------------------------------------
 
 common defaults
@@ -443,8 +443,8 @@ library lib-server
   if flag(cabal-parsers)
     build-depends: cabal-parsers ^>= 0
 
-  if !os(darwin)
-    extra-libraries: crypt
+  -- if !os(darwin)
+  --   extra-libraries: crypt
 
 ----------------------------------------------------------------------------
 
@@ -645,12 +645,13 @@ test-suite HashTests
     , tasty       ^>= 1.4
     , tasty-hunit ^>= 0.10
 
--- test-suite DocTests
---   import:         test-defaults
-
---   type:           exitcode-stdio-1.0
---   main-is:        DocTestMain.hs
---   build-depends:
---     , lib-server
---     , doctest-parallel ^>= 0.2.2
---         -- doctest-parallel-0.2.2 is the first to filter out autogen-modules
+test-suite DocTests
+  import:         test-defaults
+  x-doctest-options: --no-magic
+  type:           exitcode-stdio-1.0
+  main-is:        DocTestMain.hs
+  build-depends:
+    , lib-server
+    -- , doctest
+    , doctest-parallel ^>= 0.2.6
+        -- doctest-parallel-0.2.2 is the first to filter out autogen-modules
