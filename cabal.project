@@ -1,9 +1,3 @@
-packages:
-         .
-
--- This comment moved below "packages" to fix parsing of this file
--- by flake.nix
-
 -- This project config requires cabal 2.4 or later
 
 -- If in doubt, use GHC 8.8 to build hackage-server; see
@@ -12,7 +6,8 @@ packages:
 --
 -- with-compiler: ghc-8.8
 
-         
+packages: .
+
 allow-newer: rss:time, rss:base
 
 -----------------------------------------------------------------------------
