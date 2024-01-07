@@ -39,6 +39,7 @@
             ghc-lib-parser-ex.source = "9.6.0.2";
             hlint.source = "3.6.1";
             stylish-haskell.source = "0.14.5.0";
+            tar.source = "0.6.0.0";
           };
           devShell = {
             tools = hp: {
