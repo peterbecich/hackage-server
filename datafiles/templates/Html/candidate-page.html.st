@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="search" href="/packages/opensearch.xml" type="application/opensearchdescription+xml" title="Hackage"/>
   <link rel="canonical" href="/package/$package.name$"/>
-  <script src="/static/jquery.min.js"></script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
 
