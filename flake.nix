@@ -41,6 +41,24 @@
           '';
         };
         packages.default = config.packages.hackage-server;
+
+
+        packages.dockerImageHackage = pkgs.dockerTools.streamLayeredImage {
+          name = "haskell/hackage-server-mirror";
+          tag = "latest";
+          created = "now";
+          contents = [
+            (pkgs.haskell.lib.justStaticExecutables self'.packages.hackage-server)
+          ];
+
+          config = {
+            Cmd = [ "hackage-mirror" ];
+            ExposedPorts = {
+              "8080/tcp" = {};
+            };
+          };
+        };
+
         haskellProjects.default = {
           settings = {
             hackage-server.check = false;
